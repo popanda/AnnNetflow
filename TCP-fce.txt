@@ -1,0 +1,262 @@
+Option input with value pcap_files/TCP-communication.pcap.
+		pktTime.tv_sec:1442473189  -  intervalBgn.tv_sec:1442473189 (0)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473189
+	Recieved packet time (microseconds): 			947256
+	Length 74 received at Thu Sep 17 08:59:49 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 14501, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 15360 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+		TCP FLAG: SYN
+ADDED NEW FLOW: 
+TCP src port: 5869  TCP dst port: 55815
+		pktTime.tv_sec:1442473189  -  intervalBgn.tv_sec:1442473189 (0)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473189
+	Recieved packet time (microseconds): 			947267
+	Length 74 received at Thu Sep 17 08:59:49 2015
+
+	Source MAC: 50:e5:49:35:de:99
+		Ethernet type packet processing...
+	IP id 15145, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 15360 bytes, TTL 64
+		TCP protocol processing.
+		src port: 55815	dst port: 5869
+		src addr: 147.229.12.101	dst addr: 147.229.12.101
+ADDED NEW FLOW: 
+TCP src port: 55815  TCP dst port: 5869
+		pktTime.tv_sec:1442473189  -  intervalBgn.tv_sec:1442473189 (0)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473189
+	Recieved packet time (microseconds): 			947382
+	Length 66 received at Thu Sep 17 08:59:49 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 14502, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 13312 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+		TCP FLAG: ACK
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473198  -  intervalBgn.tv_sec:1442473189 (9)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473198
+	Recieved packet time (microseconds): 			336637
+	Length 86 received at Thu Sep 17 08:59:58 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 14503, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 18432 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473198  -  intervalBgn.tv_sec:1442473189 (9)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473198
+	Recieved packet time (microseconds): 			336667
+	Length 86 received at Thu Sep 17 08:59:58 2015
+
+	Source MAC: 50:e5:49:35:de:99
+		Ethernet type packet processing...
+	IP id 15184, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 18432 bytes, TTL 64
+		TCP protocol processing.
+		src port: 55815	dst port: 5869
+		src addr: 147.229.12.101	dst addr: 147.229.12.101
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473198  -  intervalBgn.tv_sec:1442473189 (9)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473198
+	Recieved packet time (microseconds): 			336839
+	Length 66 received at Thu Sep 17 08:59:58 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 14504, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 13312 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+		TCP FLAG: ACK
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473204  -  intervalBgn.tv_sec:1442473189 (15)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473204
+	Recieved packet time (microseconds): 			127397
+	Length 77 received at Thu Sep 17 09:00:04 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 14505, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 16128 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473204  -  intervalBgn.tv_sec:1442473189 (15)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473204
+	Recieved packet time (microseconds): 			127424
+	Length 77 received at Thu Sep 17 09:00:04 2015
+
+	Source MAC: 50:e5:49:35:de:99
+		Ethernet type packet processing...
+	IP id 15205, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 16128 bytes, TTL 64
+		TCP protocol processing.
+		src port: 55815	dst port: 5869
+		src addr: 147.229.12.101	dst addr: 147.229.12.101
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473204  -  intervalBgn.tv_sec:1442473189 (15)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473204
+	Recieved packet time (microseconds): 			127530
+	Length 66 received at Thu Sep 17 09:00:04 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 14506, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 13312 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+		TCP FLAG: ACK
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473211  -  intervalBgn.tv_sec:1442473189 (22)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473211
+	Recieved packet time (microseconds): 			11859
+	Length 85 received at Thu Sep 17 09:00:11 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 14507, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 18176 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473211  -  intervalBgn.tv_sec:1442473189 (22)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473211
+	Recieved packet time (microseconds): 			11883
+	Length 85 received at Thu Sep 17 09:00:11 2015
+
+	Source MAC: 50:e5:49:35:de:99
+		Ethernet type packet processing...
+	IP id 15241, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 18176 bytes, TTL 64
+		TCP protocol processing.
+		src port: 55815	dst port: 5869
+		src addr: 147.229.12.101	dst addr: 147.229.12.101
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473211  -  intervalBgn.tv_sec:1442473189 (22)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473211
+	Recieved packet time (microseconds): 			11986
+	Length 66 received at Thu Sep 17 09:00:11 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 14508, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 13312 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+		TCP FLAG: ACK
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473212  -  intervalBgn.tv_sec:1442473189 (23)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473212
+	Recieved packet time (microseconds): 			693192
+	Length 66 received at Thu Sep 17 09:00:12 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 14509, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 13312 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473212  -  intervalBgn.tv_sec:1442473189 (23)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473212
+	Recieved packet time (microseconds): 			693203
+	Length 66 received at Thu Sep 17 09:00:12 2015
+
+	Source MAC: 50:e5:49:35:de:99
+		Ethernet type packet processing...
+	IP id 15244, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 13312 bytes, TTL 64
+		TCP protocol processing.
+		src port: 55815	dst port: 5869
+		src addr: 147.229.12.101	dst addr: 147.229.12.101
+		TCP FLAG: ACK
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473212  -  intervalBgn.tv_sec:1442473189 (23)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473212
+	Recieved packet time (microseconds): 			693216
+	Length 66 received at Thu Sep 17 09:00:12 2015
+
+	Source MAC: 50:e5:49:35:de:99
+		Ethernet type packet processing...
+	IP id 15245, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 13312 bytes, TTL 64
+		TCP protocol processing.
+		src port: 55815	dst port: 5869
+		src addr: 147.229.12.101	dst addr: 147.229.12.101
+This packet is part of already existing flow!
+		pktTime.tv_sec:1442473212  -  intervalBgn.tv_sec:1442473189 (23)  >=  params.intervalToExport:300
+
+
+	Recieved packet time (seconds): 			1442473212
+	Recieved packet time (microseconds): 			693290
+	Length 66 received at Thu Sep 17 09:00:12 2015
+
+	Source MAC: 0:4:96:1d:4e:30
+		Ethernet type packet processing...
+	IP id 33541, header lenght 20bytes, version 4
+	IP type of service: 0	IP total length 13312 bytes, TTL 63
+		TCP protocol processing.
+		src port: 5869	dst port: 55815
+		src addr: 147.229.176.19	dst addr: 147.229.176.19
+		TCP FLAG: ACK
+This packet is part of already existing flow!
+Number of expired flows: 0
+Number of flows in cache: 2
+End of file reached...
+== STATISTICS ==
+TCP 	packets: 16,	bytes: 1172
+UDP 	packets: 0,	bytes: 0
+ICMP 	packets: 0,	bytes: 0
+IGMP 	packets: 0,	bytes: 0
+ARP 	packets: 0,	bytes: 0
+OTHER 	packets: 0,	bytes: 0
+total 	packets: 16,	bytes: 1172
+== END OF STATISTICS ==

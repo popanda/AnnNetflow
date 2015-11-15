@@ -1,0 +1,88 @@
+Option input with value pcap_files/broadcast-communication.pcap.
+
+
+	CECKING THE INTERVAL TO EXPORT:  pktTime.tv_sec:1443532251  -  intervalBgn->tv_sec:1443532251 (0)  >=  params.intervalToExport:300
+	Recieved packet time (seconds):1443532251 	(microseconds):39811
+	Length 84 received at Tue Sep 29 15:10:51 2015
+	UDP (147.229.12.101 : 9837  -->  147.229.12.101 : 53764) PROTOCOL PROCESSING.
+Expired flows: 
+		147.229.12.101:9837 --> 147.229.12.101:53764
+Processing flows: 
+
+
+	CECKING THE INTERVAL TO EXPORT:  pktTime.tv_sec:1443532251  -  intervalBgn->tv_sec:1443532251 (0)  >=  params.intervalToExport:300
+	Recieved packet time (seconds):1443532251 	(microseconds):39817
+	Length 84 received at Tue Sep 29 15:10:51 2015
+	UDP (147.229.12.101 : 9837  -->  147.229.12.101 : 53764) PROTOCOL PROCESSING.
+Expired flows: 
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+Processing flows: 
+
+
+	CECKING THE INTERVAL TO EXPORT:  pktTime.tv_sec:1443532261  -  intervalBgn->tv_sec:1443532251 (10)  >=  params.intervalToExport:300
+	Recieved packet time (seconds):1443532261 	(microseconds):921514
+	Length 60 received at Tue Sep 29 15:11:01 2015
+	UDP (147.229.12.101 : 9837  -->  147.229.12.101 : 53764) PROTOCOL PROCESSING.
+Expired flows: 
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+Processing flows: 
+
+
+	CECKING THE INTERVAL TO EXPORT:  pktTime.tv_sec:1443532261  -  intervalBgn->tv_sec:1443532251 (10)  >=  params.intervalToExport:300
+	Recieved packet time (seconds):1443532261 	(microseconds):921520
+	Length 60 received at Tue Sep 29 15:11:01 2015
+	UDP (147.229.12.101 : 9837  -->  147.229.12.101 : 53764) PROTOCOL PROCESSING.
+Expired flows: 
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+Processing flows: 
+
+
+	CECKING THE INTERVAL TO EXPORT:  pktTime.tv_sec:1443532270  -  intervalBgn->tv_sec:1443532251 (19)  >=  params.intervalToExport:300
+	Recieved packet time (seconds):1443532270 	(microseconds):208153
+	Length 46 received at Tue Sep 29 15:11:10 2015
+	UDP (147.229.12.101 : 9837  -->  147.229.12.101 : 53764) PROTOCOL PROCESSING.
+Expired flows: 
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+Processing flows: 
+
+
+	CECKING THE INTERVAL TO EXPORT:  pktTime.tv_sec:1443532270  -  intervalBgn->tv_sec:1443532251 (19)  >=  params.intervalToExport:300
+	Recieved packet time (seconds):1443532270 	(microseconds):208160
+	Length 46 received at Tue Sep 29 15:11:10 2015
+	UDP (147.229.12.101 : 9837  -->  147.229.12.101 : 53764) PROTOCOL PROCESSING.
+Expired flows: 
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+		147.229.12.101:9837 --> 147.229.12.101:53764
+Processing flows: 
+9837 : 53764  |  147.229.12.101 : 147.229.12.101  |    |  packets: 1  |  bytes: 84
+9837 : 53764  |  147.229.12.101 : 147.229.12.101  |    |  packets: 1  |  bytes: 84
+9837 : 53764  |  147.229.12.101 : 147.229.12.101  |    |  packets: 1  |  bytes: 60
+9837 : 53764  |  147.229.12.101 : 147.229.12.101  |    |  packets: 1  |  bytes: 60
+9837 : 53764  |  147.229.12.101 : 147.229.12.101  |    |  packets: 1  |  bytes: 46
+9837 : 53764  |  147.229.12.101 : 147.229.12.101  |    |  packets: 1  |  bytes: 46
+Number of expired flows: 6
+Number of flows in cache: 0
+End of file reached...
+== STATISTICS ==
+TCP 	packets: 0,	bytes: 0
+UDP 	packets: 6,	bytes: 380
+ICMP 	packets: 0,	bytes: 0
+IGMP 	packets: 0,	bytes: 0
+ARP 	packets: 0,	bytes: 0
+OTHER 	packets: 0,	bytes: 0
+total 	packets: 6,	bytes: 380
+== END OF STATISTICS ==

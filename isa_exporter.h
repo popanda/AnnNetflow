@@ -13,6 +13,8 @@
 #include <netinet/tcp.h>
 #include <getopt.h>
 #include <vector>
+#include <bitset>
+
 
 #define SERR std::cerr
 #define SOUT std::cout
@@ -27,6 +29,14 @@
 #define UDP_PROTO 17
 
 #define DEBUG 1
+
+typedef struct pktInfo {
+	in_addr srcAddr;
+	in_addr dstAddr;
+	u_short srcPort;
+	u_short dstPort;
+	u_char proto;
+} t_pktInfo;
 
 typedef struct params {
 	
@@ -46,21 +56,24 @@ typedef struct flowInfo
 	u_short srcPort;
 	u_short dstPort;
 	u_char proto;
-	bool isExpired;
 	int pktCnt;
 	long byteCnt;
 	struct timeval lstPktTime;
 	struct timeval startTime;
 	struct timeval endTime;
+	bool oneAckToExp;
 
 	/* data */
 } t_flowInfo;
 
 typedef std::vector<t_flowInfo *> t_flowInfoVector;
 
-int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct ip *myIP, struct timeval pktTime, bpf_u_int32 len, t_params params);
-int processUDP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct ip *myIP, struct timeval pktTime, bpf_u_int32 len, t_params params);
+int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct ip *myIP, struct timeval pktTime, bpf_u_int32 len, t_params params, struct timeval *intervalBgn);
+int processUDP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct ip *myIP, struct timeval pktTime, bpf_u_int32 len, t_params params, struct timeval *intervalBgn);
 t_flowInfo *createNewFlow(u_short srcPort, u_short dstPort, unsigned long srcAddr, unsigned long dstAddr, int proto, long lstPktTime);
+int isEqualFlow(t_pktInfo pktInfo, t_flowInfo *flow);
+int isOppositeFlow(t_pktInfo pktInfo, t_flowInfo *flow);
+int exportExpired(t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime, struct timeval *intervalBgn);
 
 int processParams(int argc, char **argv, t_params *ptrParams);
 void setDefaultsParams(t_params *ptrParams);
@@ -87,6 +100,11 @@ struct ip {
 	u_char	ip_p;					protocol 
 	u_short	ip_sum;					checksum 
 	struct	in_addr ip_src,ip_dst;	source and dest address
+
+	struct in_addr {
+    unsigned long s_addr;  // load with inet_aton()
+	};
+
 }
 
 struct tcphdr {
