@@ -14,7 +14,7 @@
 #include <getopt.h>
 #include <vector>
 #include <bitset>
-
+#include <ctime>
 
 #define SERR std::cerr
 #define SOUT std::cout
@@ -56,8 +56,11 @@ typedef struct flowInfo
 	u_short srcPort;
 	u_short dstPort;
 	u_char proto;
-	int pktCnt;
-	long byteCnt;
+	u_int pktCnt;
+	u_int octCnt;
+	u_long byteCnt;
+	u_char ToS;
+	u_char tcpFlags;
 	struct timeval lstPktTime;
 	struct timeval startTime;
 	struct timeval endTime;
@@ -68,15 +71,20 @@ typedef struct flowInfo
 
 typedef std::vector<t_flowInfo *> t_flowInfoVector;
 
-int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct ip *myIP, struct timeval pktTime, bpf_u_int32 len, t_params params, struct timeval *intervalBgn);
-int processUDP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct ip *myIP, struct timeval pktTime, bpf_u_int32 len, t_params params, struct timeval *intervalBgn);
+int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct ip *myIP, struct timeval pktTime, bpf_u_int32 len, t_params params, double *intervalBgn);
+int processUDPorICMPorIGMP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct ip *myIP, struct timeval pktTime, bpf_u_int32 len, t_params params, double *intervalBgn);
 t_flowInfo *createNewFlow(u_short srcPort, u_short dstPort, unsigned long srcAddr, unsigned long dstAddr, int proto, long lstPktTime);
 int isEqualFlow(t_pktInfo pktInfo, t_flowInfo *flow);
 int isOppositeFlow(t_pktInfo pktInfo, t_flowInfo *flow);
-int exportExpired(t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime, struct timeval *intervalBgn);
+int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime, double *intervalBgn);
+void expireOldestUnactive(t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime);
+int expireAll(t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime);
+
+
 
 int processParams(int argc, char **argv, t_params *ptrParams);
 void setDefaultsParams(t_params *ptrParams);
+double timeInSeconds(struct timeval t);
 
 
 
