@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <netinet/in.h>
-#include <netinet/ip.h>
 #include <netinet/udp.h>
 #include <netinet/ip_icmp.h>
 #include <netinet/igmp.h>
@@ -15,6 +14,16 @@
 #include <vector>
 #include <bitset>
 #include <ctime>
+#include <cmath>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <netdb.h>
+#include <string.h>
+#include <sstream>
+#include <vector>
+
 
 #define SERR std::cerr
 #define SOUT std::cout
@@ -28,7 +37,8 @@
 #define TCP_PROTO 6
 #define UDP_PROTO 17
 
-#define DEBUG 1
+#define DEBUG 0
+#define MORE_DEBUG 0
 
 typedef struct pktInfo {
 	in_addr srcAddr;
@@ -44,7 +54,7 @@ typedef struct params {
 	in_addr collectorAddr;
 	int collectorPort;
 	int intervalToExport;
-	int maxFlows;
+	u_int maxFlows;
 	int intervalToExpire;
 
 } t_params;
@@ -76,11 +86,12 @@ int processUDPorICMPorIGMP(const u_char *packet, t_flowInfoVector *flowInfoVecto
 t_flowInfo *createNewFlow(u_short srcPort, u_short dstPort, unsigned long srcAddr, unsigned long dstAddr, int proto, long lstPktTime);
 int isEqualFlow(t_pktInfo pktInfo, t_flowInfo *flow);
 int isOppositeFlow(t_pktInfo pktInfo, t_flowInfo *flow);
-int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime, double *intervalBgn);
+int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime, double *intervalBgn, t_params params);
 void expireOldestUnactive(t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime);
 int expireAll(t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime);
 
-
+std::vector<std::string> split(const std::string &s, char delim);
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
 
 int processParams(int argc, char **argv, t_params *ptrParams);
 void setDefaultsParams(t_params *ptrParams);

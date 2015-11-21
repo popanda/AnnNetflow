@@ -2,7 +2,7 @@
 #include "packets.h"
 
 // number of flows seen since the virtual machine isa2015 boted
-u_long flowSequence;
+u_int32_t flowSequence;
 
 // time of the first packet arrival (SysUptime for us)
 double firstPktArr;
@@ -74,9 +74,13 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
+
 	//open the pcap file or STDIN if no imput file is specified
 	if ((pcapHandle = pcap_open_offline(params.inFile, errbuf)) == NULL)
-		SERR << "Cannot open pcap file." << std::endl;
+	{
+		SERR << "Error occured while opening pcap file. The file is most likely invalid." << std::endl;
+		return 1;
+	}
 
 	bool isFirstPkt = true;
 	//main cycle for processing packets from the file - cycle until EOF
@@ -93,10 +97,13 @@ int main(int argc, char **argv)
 			firstPktArr = timeInSeconds(packetHeader.ts);
 			isFirstPkt = false;
 		}
-
+		
 		if (DEBUG)
+			SOUT << "\n\nPcket no. " << tcps + udps + icmps + igmps + 1 << std::endl;
+
+		if (MORE_DEBUG)
 		{
-			SOUT << "\n\n\tCECKING THE INTERVAL TO EXPORT:";
+			SOUT << "\tCECKING THE INTERVAL TO EXPORT:";
 			//SOUT << "  pktTime.tv_sec:" << pktTime.tv_sec << "  -  intervalBgn->tv_sec:" << intervalBgn->tv_sec << " (" << pktTime.tv_sec - intervalBgn->tv_sec << ")  >=  " << "params.intervalToExport:" << params.intervalToExport << std::endl;
 			SOUT << "  pktTime:" << std::fixed << timeInSeconds(pktTime) << "  -  intervalBgn:" << std::fixed << *intervalBgn << " (" << std::fixed << timeInSeconds(pktTime) - *intervalBgn << ")  >=  " << "params.intervalToExport:" << params.intervalToExport << std::endl;
 		}
@@ -110,7 +117,11 @@ int main(int argc, char **argv)
 					 << "\tExporting expired flows!" << std::endl;
 			}
 
-			exportExpired(expiredFlowInfoVector, pktTime, intervalBgn);
+			if ((exportExpired(expiredFlowInfoVector, pktTime, intervalBgn, params)) != 0)
+			{
+				SERR << "Error occured while exporting to collector." << std::endl;
+				return 1;
+			}
 
 		}
 
@@ -118,7 +129,7 @@ int main(int argc, char **argv)
 
 		for(t_flowInfoVector::iterator iterator = flowInfoVector->begin(); iterator != flowInfoVector->end(); ) 
 		{
-			if (DEBUG)
+			if (MORE_DEBUG)
 			{
 				SOUT << "\tCHECKING THE timeout TO EXPIRE:";
 				SOUT << "\tpktTime:" << std::fixed << timeInSeconds(pktTime) << "  -  (*iterator)->lstPktTime:" << std::fixed << timeInSeconds((*iterator)->lstPktTime) << " (" << std::fixed << (timeInSeconds(pktTime) - timeInSeconds((*iterator)->lstPktTime)) << ")  >=  params.intervalToExpire:" << params.intervalToExpire << std::endl;
@@ -130,7 +141,7 @@ int main(int argc, char **argv)
 				if (DEBUG)
 					SOUT << "\t --> Unactive timeout reached!" << std::endl;
 
-				if (DEBUG)
+				if (MORE_DEBUG)
 					SOUT << "\tbefore: expired: " << expiredFlowInfoVector->size() << "  cache: " << flowInfoVector->size() << std::endl;
 				
 				//expiring this flow
@@ -139,7 +150,7 @@ int main(int argc, char **argv)
 				expiredFlowInfoVector->push_back(*iterator);
 				flowInfoVector->erase(iterator);
 				
-				if (DEBUG)
+				if (MORE_DEBUG)
 					SOUT << "\tafter: expired: " << expiredFlowInfoVector->size() << "  cache: " << flowInfoVector->size() << std::endl;
 			}
 			else
@@ -164,13 +175,6 @@ int main(int argc, char **argv)
 			struct ip *myIP;
 			myIP = (struct ip*) (packet+ETH_HEADER);
 
-			if (0)
-			{
-				SOUT << "\tEthernet type packet processing..." << std::endl;
-				SOUT << "\tIP id " << ntohs(myIP->ip_id) << ", header lenght "<< myIP->ip_hl*4 << "bytes, version " << myIP->ip_v << std::endl;;
-				SOUT << "\tIP type of service: " << u_short(myIP->ip_tos) << "\tIP total length " << myIP->ip_len << " bytes, TTL " << u_short(myIP->ip_ttl) << std::endl;
-			}
-
 			//what kind of protocol the current packet is?
 			switch(myIP->ip_p)
 			{	
@@ -193,7 +197,7 @@ int main(int argc, char **argv)
 			if (retValue != 0)
 			{				
 				if (retValue == 1)
-					SERR << "Error while proccesing packet TCP/UDP/ICMP/IGMP." << std::endl;
+					SERR << "Error while proccesing TCP/UDP/ICMP/IGMP packet" << std::endl;
 				if (retValue == 2)
 					SERR << "Error while proccesing Unknown packet." << std::endl;
 				return 1;
@@ -205,16 +209,17 @@ int main(int argc, char **argv)
 			if (DEBUG)
 			{
 				SOUT << "\tARP packet processing..." << std::endl;
-				arps++;
+				
 			}
+			arps++;
 		}
 		else
 		{
 			if (DEBUG)
 			{
 				SOUT << "\tEthernet type 0x" << ntohs(etherPtr->ether_type) << " not IPv4" << std::endl;	
-				others++;
 			}
+			others++;
 		}
 	}
 	
@@ -226,13 +231,22 @@ int main(int argc, char **argv)
 			SOUT << (*iterator)->srcPort << " : " << (*iterator)->dstPort << "  |  " << inet_ntoa((*iterator)->srcAddr) << " : " << inet_ntoa((*iterator)->dstAddr) << "  |  " <<
 			(*iterator)->proto << "  |  " << "packets: " << (*iterator)->pktCnt << "  |  bytes: " << (*iterator)->byteCnt << std::endl;
 		}
+	}
 
 		SOUT << "Number of expired flows: " << expiredFlowInfoVector->size() << std::endl;
 		SOUT << "Number of flows in cache: " << flowInfoVector->size() << std::endl;
 		SOUT << "End of file reached..." << std::endl;
 
-		expireAll(flowInfoVector, expiredFlowInfoVector, pktTime);
-		exportExpired(expiredFlowInfoVector, pktTime, intervalBgn);
+		if ((expireAll(flowInfoVector, expiredFlowInfoVector, pktTime)) != 0)
+		{
+			SERR << "Error occured while expiring the rest of the processing flows." << std::endl;
+			return 1;
+		}
+		if ((exportExpired(expiredFlowInfoVector, pktTime, intervalBgn, params)) != 0)
+		{
+			SERR << "Error occured while exporting." << std::endl;
+			return 1;
+		}
 
 		SOUT << "== STATISTICS ==" << std::endl;
 		SOUT << "Total flows: " << flowSequence << std::endl;
@@ -247,7 +261,7 @@ int main(int argc, char **argv)
 		
 		SOUT << "== END OF STATISTICS ==" << std::endl;
 
-	}
+	
 
 	pcap_close(pcapHandle);
 
@@ -291,6 +305,9 @@ int processParams(int argc, char **argv, t_params *ptrParams)
 
 	while ((a = getopt_long(argc, argv, "i:c:I:m:t:", longOptions, &optind)) != -1)
 	{
+		u_int16_t i = 1;
+		std::vector<std::string> splitted; 
+		std::string tmpString;
 
 		switch(a)
 		{
@@ -304,13 +321,39 @@ int processParams(int argc, char **argv, t_params *ptrParams)
 				break;
 
 			case 'c':
+				tmpString.assign(optarg);
+				SOUT << "Parsing: " << tmpString << std::endl;
+				splitted = split(tmpString, ':');
+				for(std::vector<std::string>::iterator iterator = splitted.begin(); iterator != splitted.end(); ++iterator) 
+				{			
+					
+					if (i == 1)
+					{
+						SOUT << "Adress processing." << *iterator << std::endl;
+// 						if ((inet_aton(, &(ptrParams->collectorAddr))) == 0)
+// 						{
+// 							SERR << "Invalid collector address."<< std::endl << "Exiting..." << std::endl;
+// 							return -1;
+// 						}
+					}	
+					else
+					{
+						//port processing
+						SOUT << "Port processing." << std::endl;
+// 						ptrParams->collectorPort = strtol(*iterator, &endPtr, 10);
+						if (*endPtr != '\0')
+						{
+							SERR << "Invalid value for max-flows." << std::endl << "Exiting..." << std::endl;
+							return -1;
+						}
+						
+					}	
+					i++;
+				}
+							
 				if(DEBUG)
 					SOUT << "Option collector with value " << optarg << "." << std::endl;
-				if ((inet_aton(optarg, &(ptrParams->collectorAddr))) == 0)
-				{
-					SERR << "Invalid collector address."<< std::endl << "Exiting..." << std::endl;
-					return -1;
-				}
+
 				break;
 
 			case 'I':
@@ -437,6 +480,7 @@ int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInf
 	}
 
 	bool needNewFlow = true;
+	bool expireImmediately = false;
 		
 	for(t_flowInfoVector::iterator iterator = flowInfoVector->begin(); iterator != flowInfoVector->end(); ++iterator) 
 	{
@@ -457,34 +501,6 @@ int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInf
 		}
 	}
 
-	//flow with the same onformation as this packet has is not fouded - has to be created new flow 
-	if (needNewFlow)
-	{
-		//at first check if there are more than max-flows in cache
-		if (flowInfoVector->size() >= params.maxFlows)
-		{
-			if (DEBUG)
-			{
-				SOUT << "\t --> Max-flows in cache reached!" 
-					 << "\tExpiring the oldest unactive flow!" << std::endl;
-			}
-			expireOldestUnactive(flowInfoVector, expiredFlowInfoVector, pktTime);	
-		}
-		//this packet will be the firts in new flow, we have to created the new flow and save important information about this packet/flow
-		currentFlow = createNewFlow(pktInfo, pktTime);
-		currentFlow->tcpFlags = myTCP->th_flags;
-		currentFlow->ToS = myIP->ip_tos;
-		currentFlow->byteCnt += len;
-
-		flowInfoVector->push_back(currentFlow);
-
-		if (DEBUG)
-		{
-			SOUT << "\tNew flow added: "<< inet_ntoa(currentFlow->srcAddr) << ":" << currentFlow->srcPort << " --> "  
-			 << inet_ntoa(currentFlow->dstAddr) << ":" << currentFlow->dstPort << " Flows in cache now: " << flowInfoVector->size() << " Expired flows: " << expiredFlowInfoVector->size() << std::endl;
-		}
-	}
-
 	//check the flags
 	if (flags.test(0))
 	{
@@ -496,6 +512,9 @@ int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInf
 	if (flags.test(2))
 	{
 		//RST flag founded --> immediately reset this connection - both sides
+		if (needNewFlow)
+			expireImmediately = true; //this packet is alone and will be expired immediately
+
 		if (DEBUG)
 			SOUT << "\tRST flag founded. " << std::endl;
 		for(t_flowInfoVector::iterator iterator = flowInfoVector->begin(); iterator != flowInfoVector->end(); ++iterator) 
@@ -510,18 +529,18 @@ int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInf
 				break;				
 			}
 		}
-		for(t_flowInfoVector::iterator iterator = flowInfoVector->begin(); iterator != flowInfoVector->end(); ++iterator) 
-		{
-			if (isOppositeFlow(pktInfo, *iterator))
-			{
-				//expiring this flow
-				(*iterator)->endTime.tv_sec = pktTime.tv_sec;
-				(*iterator)->endTime.tv_usec = pktTime.tv_usec;
-				expiredFlowInfoVector->push_back(*iterator);
-				flowInfoVector->erase(iterator);
-				break;
-			}
-		}
+// 		for(t_flowInfoVector::iterator iterator = flowInfoVector->begin(); iterator != flowInfoVector->end(); ++iterator) 
+// 		{
+// 			if (isOppositeFlow(pktInfo, *iterator))
+// 			{
+// 				//expiring this flow
+// 				(*iterator)->endTime.tv_sec = pktTime.tv_sec;
+// 				(*iterator)->endTime.tv_usec = pktTime.tv_usec;
+// 				expiredFlowInfoVector->push_back(*iterator);
+// 				flowInfoVector->erase(iterator);
+// 				break;
+// 			}
+// 		}
 	}
 	if (flags.test(4))
 	{
@@ -540,14 +559,51 @@ int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInf
 					flowInfoVector->erase(iterator);
 					if (DEBUG)
 						SOUT << "\tACK flag founded after FIN --> Adding opposite flow to expired, erasing from cache..." << std::endl;
+					if (needNewFlow)
+						expireImmediately = true; //this packet is alone and will be expired immediately
 				}
 
 				break;
 			}
 		}
 	}
+	
+		//flow with the same onformation as this packet has is not fouded - has to be created new flow 
+	if (needNewFlow)
+	{
+		//at first check if there are more than max-flows in cache
+		if (flowInfoVector->size() >= params.maxFlows)
+		{
+			if (DEBUG)
+			{
+				SOUT << "\t --> Max-flows in cache reached!" 
+					 << "\tExpiring the oldest unactive flow!" << std::endl;
+			}
+			expireOldestUnactive(flowInfoVector, expiredFlowInfoVector, pktTime);
+		}
+		//this packet will be the firts in new flow, we have to created the new flow and save important information about this packet/flow
+		currentFlow = createNewFlow(pktInfo, pktTime);
+		currentFlow->tcpFlags = myTCP->th_flags;
+		currentFlow->ToS = myIP->ip_tos;
+		currentFlow->byteCnt += len;
 
-	if (DEBUG)
+		if (expireImmediately)
+		{
+			currentFlow->endTime.tv_usec = pktTime.tv_usec;
+			currentFlow->endTime.tv_sec = pktTime.tv_sec;
+			expiredFlowInfoVector->push_back(currentFlow);
+		}
+		else
+			flowInfoVector->push_back(currentFlow);
+
+		if (DEBUG)
+		{
+			SOUT << "\tNew flow added: "<< inet_ntoa(currentFlow->srcAddr) << ":" << currentFlow->srcPort << " --> "  
+			 << inet_ntoa(currentFlow->dstAddr) << ":" << currentFlow->dstPort << " Flows in cache now: " << flowInfoVector->size() << " Expired flows: " << expiredFlowInfoVector->size() << std::endl;
+		}
+	}
+
+	if (MORE_DEBUG)
 	{
 		SOUT << "Expired flows: " << std::endl;
 		for(t_flowInfoVector::iterator iterator = expiredFlowInfoVector->begin(); iterator != expiredFlowInfoVector->end(); ++iterator) 
@@ -675,7 +731,7 @@ int isOppositeFlow(t_pktInfo pktInfo, t_flowInfo *flow)
 	);
 }
 
-int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime, double *intervalBgn)
+int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime, double *intervalBgn, t_params params)
 {
 	
 
@@ -683,7 +739,11 @@ int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTim
 
 	u_short pktCnt; // <--- how many packets do will need? 
 	
-	t_nfPkt *newPkt;
+	double devBootTimeD = firstPktArr;
+	double sysuptimeD;
+	fourBytes sysuptime;
+	
+	t_flowInfoVector::iterator lastIterator = expiredFlowInfoVector->begin();
 	
 	if ((expiredFlowInfoVector->size() % MAX_FLOWS_IN_PACKET) == 0)
 	{
@@ -695,7 +755,25 @@ int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTim
 		//some of the sending packets won't be full
 		pktCnt = (expiredFlowInfoVector->size() / MAX_FLOWS_IN_PACKET) + 1;
 	}
-
+	
+	//creates new socket
+	int skt;
+	struct sockaddr_in saddr;
+	
+	if ((skt = socket(PF_INET, SOCK_DGRAM, 0)) < 0)
+	{
+		SERR << "Failed on creating packet." << std::endl;
+		return -1;
+	}
+	
+	memset(&saddr, 0, sizeof(saddr));
+	
+	saddr.sin_family = AF_INET;
+	saddr.sin_port = htons(params.collectorPort);
+	saddr.sin_addr = params.collectorAddr;
+	
+	t_nfPkt *newPkt;
+	
 	//makes new packet in every cycle and sends it to collector
 	for (;pktCnt;pktCnt--)
 	{
@@ -703,56 +781,85 @@ int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTim
 		
 		u_short flowsCnt = 0;
 		
-		SOUT << "In this packet there will be these flows: " <<  std::endl;
+		if (MORE_DEBUG)
+			SOUT << "In this packet there will be these flows: " <<  std::endl;
 
 		
 		// comes through expired flows and adds into this packet
-		for(t_flowInfoVector::iterator iterator = expiredFlowInfoVector->begin(); iterator != expiredFlowInfoVector->end(); ++iterator) 
+		for(t_flowInfoVector::iterator iterator = lastIterator; iterator != expiredFlowInfoVector->end(); ++iterator) 
 		{
-			float first = (timeInSeconds((*iterator)->startTime) * 1000);
-			float last = (timeInSeconds((*iterator)->endTime) * 1000);
+			lastIterator = iterator+1;
+			double firstD = ((timeInSeconds((*iterator)->startTime)) - devBootTimeD) * 1000;
+			double lastD = ((timeInSeconds((*iterator)->endTime)) - devBootTimeD) * 1000; //*1000 seconds to miliseconds
 			
+			sysuptimeD = (timeInSeconds(pktTime) - devBootTimeD) * 1000;
 			
+			fourBytes first = round(firstD);
+			fourBytes last = round(lastD);
 			
-			
+			inet_aton("0.0.0.0", &(newPkt->rec[flowsCnt].nexthop));
 			
 			newPkt->rec[flowsCnt].srcaddr = (*iterator)->srcAddr;
 			newPkt->rec[flowsCnt].dstaddr = (*iterator)->dstAddr;
-			newPkt->rec[flowsCnt].dPkts = (*iterator)->pktCnt;
-			newPkt->rec[flowsCnt].dOctets = (*iterator)->byteCnt / 8; //TODO
-			newPkt->rec[flowsCnt].First = (u_int32_t)first;
-			newPkt->rec[flowsCnt].Last = (uint32_t)last;
+			newPkt->rec[flowsCnt].dPkts = htonl((*iterator)->pktCnt);
+			newPkt->rec[flowsCnt].dOctets = htonl((*iterator)->byteCnt); //TODO
+			newPkt->rec[flowsCnt].First = htonl(first);
+			newPkt->rec[flowsCnt].Last = htonl(last);
 			newPkt->rec[flowsCnt].srcport = (*iterator)->srcPort;
 			newPkt->rec[flowsCnt].dstport = (*iterator)->dstPort;
 			newPkt->rec[flowsCnt].tcp_flags = (*iterator)->tcpFlags;
 			newPkt->rec[flowsCnt].prot = (*iterator)->proto;
 			newPkt->rec[flowsCnt].ToS = (*iterator)->ToS;
-				
-			SOUT << inet_ntoa(newPkt->rec[flowsCnt].srcaddr) << " : " << inet_ntoa(newPkt->rec[flowsCnt].dstaddr) << " : " << inet_ntoa(newPkt->rec[flowsCnt].nexthop) << " : " << newPkt->rec[flowsCnt].input << " : " << newPkt->rec[flowsCnt].output << " : " << newPkt->rec[flowsCnt].dPkts << " : " << newPkt->rec[flowsCnt].dOctets << " : " << newPkt->rec[flowsCnt].First << " (" << first << ") : " << newPkt->rec[flowsCnt].Last << " ("  << last << ") : " << newPkt->rec[flowsCnt].srcport << " : " << newPkt->rec[flowsCnt].dstport << " : " << newPkt->rec[flowsCnt].pad1 << " : " << newPkt->rec[flowsCnt].tcp_flags << " : " << newPkt->rec[flowsCnt].prot <<  " : " << newPkt->rec[flowsCnt].ToS << " : " << newPkt->rec[flowsCnt].src_as << " : " << newPkt->rec[flowsCnt].dst_as << " : " << newPkt->rec[flowsCnt].src_mask << " : " << newPkt->rec[flowsCnt].dst_mask << " : " << newPkt->rec[flowsCnt].pad2 <<  std::endl;
+			
+			if (MORE_DEBUG)
+			{
+				SOUT << inet_ntoa(newPkt->rec[flowsCnt].srcaddr) << " : " << std::endl;
+				SOUT << inet_ntoa(newPkt->rec[flowsCnt].dstaddr) << " : " << std::endl;
+				SOUT << inet_ntoa(newPkt->rec[flowsCnt].nexthop) << " : " << std::endl;
+				SOUT << newPkt->rec[flowsCnt].input << " : " << newPkt->rec[flowsCnt].output << " : " << newPkt->rec[flowsCnt].dPkts << " : " << newPkt->rec[flowsCnt].dOctets << " : " << newPkt->rec[flowsCnt].First << " (" << firstD << ") : " << newPkt->rec[flowsCnt].Last << " ("  << lastD << ") : " << newPkt->rec[flowsCnt].srcport << " : " << newPkt->rec[flowsCnt].dstport << " : " << newPkt->rec[flowsCnt].pad1 << " : " << newPkt->rec[flowsCnt].tcp_flags << " : " << newPkt->rec[flowsCnt].prot <<  " : " << newPkt->rec[flowsCnt].ToS << " : " << newPkt->rec[flowsCnt].src_as << " : " << newPkt->rec[flowsCnt].dst_as << " : " << newPkt->rec[flowsCnt].src_mask << " : " << newPkt->rec[flowsCnt].dst_mask << " : " << newPkt->rec[flowsCnt].pad2 <<  std::endl;
+			}
 				
 			flowsCnt++;
+				
+			if (flowsCnt >= MAX_FLOWS_IN_PACKET)
+				break;
 			
-			delete newPkt;
 		}
 		
 		//adds header for this packet
-		newPkt->hdr.count = flowsCnt;
-		newPkt->hdr.SysUptime = firstPktArr;
-		newPkt->hdr.unix_secs = pktTime.tv_sec;
-		newPkt->hdr.unix_nsecs = pktTime.tv_usec;
-		newPkt->hdr.flow_sequence = flowSequence;
+		sysuptime = round(sysuptimeD);
+		
+		newPkt->hdr.count = htons(flowsCnt);
+		newPkt->hdr.SysUptime = htonl(sysuptime);
+		newPkt->hdr.unix_secs = htonl(pktTime.tv_sec);
+		newPkt->hdr.unix_nsecs = htonl(pktTime.tv_usec);
+		
+		newPkt->hdr.version = htons(5);
+		newPkt->hdr.flow_sequence = htonl(flowSequence);
 			
 		// packet is ready to send
-		SOUT << "Packet is ready to send: header: " <<  std::endl;
-		SOUT <<  newPkt->hdr.version << " : " << newPkt->hdr.count << " : " << newPkt->hdr.SysUptime << " : " << newPkt->hdr.unix_secs << " : " << newPkt->hdr.unix_nsecs << " : " << newPkt->hdr.flow_sequence << " : " << newPkt->hdr.engine_type << " : " << newPkt->hdr.engine_id << " : " << newPkt->hdr.sampling_interval << std::endl;
-		
+		if (MORE_DEBUG)
+		{
+			SOUT << "Packet is ready to send (with " << flowsCnt << " flows), total size: " << sizeof(*newPkt) << ", header size: " << sizeof(newPkt->hdr) << ". \nHeader: " <<  std::endl;
+			SOUT <<  newPkt->hdr.version << " : " << newPkt->hdr.count << " : " << newPkt->hdr.SysUptime << " ("  << sysuptimeD << ") : " << newPkt->hdr.unix_secs << " : " << newPkt->hdr.unix_nsecs << " : " << newPkt->hdr.flow_sequence << " : " << newPkt->hdr.engine_type << " : " << newPkt->hdr.engine_id << " : " << newPkt->hdr.sampling_interval << std::endl;
+		}
+			
 		//sends this packet
+		if ((sendto(skt, newPkt, sizeof(t_nfV5hdr) + flowsCnt * sizeof(t_nfV5flowRec), 0, (const sockaddr *)&saddr, sizeof(saddr))) == -1)
+		{
+			SERR << "Error occured while sending packet to collector." << std::endl;
+			return -1;
+		}
+		
+		if (MORE_DEBUG)
+			SOUT << "Packet sended successfuly!" << std::endl;
+		
+		delete newPkt;
+		
 	}
 
 	
-
-	
-	if (DEBUG)
+	if (MORE_DEBUG)
 	{
 		SOUT << "\tExporting: ..." << std::endl;
 		for(t_flowInfoVector::iterator iterator = expiredFlowInfoVector->begin(); iterator != expiredFlowInfoVector->end(); ++iterator) 
@@ -765,6 +872,8 @@ int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTim
 	*intervalBgn = timeInSeconds(pktTime);
 
 	expiredFlowInfoVector->clear();
+	
+	return 0;
 }
 
 int expireAll(t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime)
@@ -779,8 +888,9 @@ int expireAll(t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInf
 		expiredFlowInfoVector->push_back(*iterator);
 		flowInfoVector->erase(iterator);
 	}
+	
+	return 0;
 }
-
 
 double timeInSeconds(struct timeval t)
 {
@@ -793,7 +903,8 @@ double timeInSeconds(struct timeval t)
 
 void expireOldestUnactive(t_flowInfoVector *flowInfoVector, t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTime)
 {
-
+	if (flowInfoVector->size() > 0)
+	{
 		//auxilliary variable storing the oldest time of connection in cache
 		double oldstTime;
 
@@ -814,8 +925,7 @@ void expireOldestUnactive(t_flowInfoVector *flowInfoVector, t_flowInfoVector *ex
 
 		}
 		if (DEBUG)
-			SOUT << "\tExpiring the odest one (time - " << std::fixed << oldstTime << "): " << inet_ntoa((*iteratorOldst)->srcAddr) << ":" << (*iteratorOldst)->srcPort << " --> " << inet_ntoa((*iteratorOldst)->dstAddr) << ":" << (*iteratorOldst)->dstPort
-				 << "\n\tbefore: expired: " << expiredFlowInfoVector->size() << "  cache: " << flowInfoVector->size();
+			SOUT << "\tExpiring the odest one (time - " << std::fixed << oldstTime << "): " << inet_ntoa((*iteratorOldst)->srcAddr) << ":" << (*iteratorOldst)->srcPort << " --> " << inet_ntoa((*iteratorOldst)->dstAddr) << ":" << (*iteratorOldst)->dstPort << "\n\tbefore: expired: " << expiredFlowInfoVector->size() << "  cache: " << flowInfoVector->size();
 		
 		//expiring this flow
 		(*iteratorOldst)->endTime.tv_sec = pktTime.tv_sec;
@@ -827,4 +937,21 @@ void expireOldestUnactive(t_flowInfoVector *flowInfoVector, t_flowInfoVector *ex
 
 		if (DEBUG)
 			SOUT << "\tafter: expired: " << expiredFlowInfoVector->size() << "  cache: " << flowInfoVector->size() << std::endl;
+	}
+}
+
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+    std::stringstream ss(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
+
+std::vector<std::string> split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    split(s, delim, elems);
+    return elems;
 }

@@ -1,0 +1,744 @@
+Option input with value pcap_files/test_file_04.pcap.
+
+
+Pcket no. 1
+	Recieved packet time (seconds):1448035861 	(microseconds):229007
+	Function timeInSeconds says: 1448035861.229007
+	Length 77 received at Fri Nov 20 17:11:01 2015
+	UDP (10.0.2.15 : 49204  -->  10.0.2.15 : 13568) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+Processing flows: 
+
+
+Pcket no. 2
+	Recieved packet time (seconds):1448035861 	(microseconds):229896
+	Function timeInSeconds says: 1448035861.229896
+	Length 77 received at Fri Nov 20 17:11:01 2015
+	UDP (10.0.2.15 : 21983  -->  10.0.2.15 : 13568) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+Processing flows: 
+
+
+Pcket no. 3
+	Recieved packet time (seconds):1448035861 	(microseconds):230323
+	Function timeInSeconds says: 1448035861.230323
+	Length 380 received at Fri Nov 20 17:11:01 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	New flow added: 10.0.2.15:64978 --> 10.0.2.15:47873 Flows in cache now: 1 Expired flows: 2
+
+
+Pcket no. 4
+	Recieved packet time (seconds):1448035861 	(microseconds):230634
+	Function timeInSeconds says: 1448035861.230634
+	Length 60 received at Fri Nov 20 17:11:01 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	New flow added: 31.13.84.8:47873 --> 31.13.84.8:64978 Flows in cache now: 2 Expired flows: 2
+
+
+Pcket no. 5
+	Recieved packet time (seconds):1448035861 	(microseconds):230863
+	Function timeInSeconds says: 1448035861.230863
+	Length 361 received at Fri Nov 20 17:11:01 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 6
+	Recieved packet time (seconds):1448035861 	(microseconds):231065
+	Function timeInSeconds says: 1448035861.231065
+	Length 60 received at Fri Nov 20 17:11:01 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 7
+	Recieved packet time (seconds):1448035861 	(microseconds):248081
+	Function timeInSeconds says: 1448035861.248081
+	Length 126 received at Fri Nov 20 17:11:01 2015
+	UDP (213.46.172.37 : 13568  -->  213.46.172.37 : 49204) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 8
+	Recieved packet time (seconds):1448035861 	(microseconds):248780
+	Function timeInSeconds says: 1448035861.248780
+	Length 138 received at Fri Nov 20 17:11:01 2015
+	UDP (213.46.172.37 : 13568  -->  213.46.172.37 : 21983) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+		213.46.172.37:13568 --> 213.46.172.37:21983
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 9
+	Recieved packet time (seconds):1448035861 	(microseconds):252391
+	Function timeInSeconds says: 1448035861.252391
+	Length 96 received at Fri Nov 20 17:11:01 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 10
+	Recieved packet time (seconds):1448035861 	(microseconds):252418
+	Function timeInSeconds says: 1448035861.252418
+	Length 54 received at Fri Nov 20 17:11:01 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 11
+	Recieved packet time (seconds):1448035861 	(microseconds):387654
+	Function timeInSeconds says: 1448035861.387654
+	Length 816 received at Fri Nov 20 17:11:01 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 12
+	Recieved packet time (seconds):1448035861 	(microseconds):387696
+	Function timeInSeconds says: 1448035861.387696
+	Length 54 received at Fri Nov 20 17:11:01 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 13
+	Recieved packet time (seconds):1448035863 	(microseconds):576262
+	Function timeInSeconds says: 1448035863.576262
+	Length 393 received at Fri Nov 20 17:11:03 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 14
+	Recieved packet time (seconds):1448035863 	(microseconds):576629
+	Function timeInSeconds says: 1448035863.576629
+	Length 60 received at Fri Nov 20 17:11:03 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 15
+	Recieved packet time (seconds):1448035863 	(microseconds):576698
+	Function timeInSeconds says: 1448035863.576698
+	Length 1068 received at Fri Nov 20 17:11:03 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 16
+	Recieved packet time (seconds):1448035863 	(microseconds):576877
+	Function timeInSeconds says: 1448035863.576877
+	Length 60 received at Fri Nov 20 17:11:03 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 17
+	Recieved packet time (seconds):1448035863 	(microseconds):577550
+	Function timeInSeconds says: 1448035863.577550
+	Length 77 received at Fri Nov 20 17:11:03 2015
+	UDP (10.0.2.15 : 3015  -->  10.0.2.15 : 13568) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+		213.46.172.37:13568 --> 213.46.172.37:21983
+		10.0.2.15:3015 --> 10.0.2.15:13568
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 18
+	Recieved packet time (seconds):1448035863 	(microseconds):577807
+	Function timeInSeconds says: 1448035863.577807
+	Length 77 received at Fri Nov 20 17:11:03 2015
+	UDP (10.0.2.15 : 34202  -->  10.0.2.15 : 13568) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+		213.46.172.37:13568 --> 213.46.172.37:21983
+		10.0.2.15:3015 --> 10.0.2.15:13568
+		10.0.2.15:34202 --> 10.0.2.15:13568
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 19
+	Recieved packet time (seconds):1448035863 	(microseconds):590244
+	Function timeInSeconds says: 1448035863.590244
+	Length 138 received at Fri Nov 20 17:11:03 2015
+	UDP (213.46.172.37 : 13568  -->  213.46.172.37 : 34202) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+		213.46.172.37:13568 --> 213.46.172.37:21983
+		10.0.2.15:3015 --> 10.0.2.15:13568
+		10.0.2.15:34202 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:34202
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 20
+	Recieved packet time (seconds):1448035863 	(microseconds):591401
+	Function timeInSeconds says: 1448035863.591401
+	Length 126 received at Fri Nov 20 17:11:03 2015
+	UDP (213.46.172.37 : 13568  -->  213.46.172.37 : 3015) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+		213.46.172.37:13568 --> 213.46.172.37:21983
+		10.0.2.15:3015 --> 10.0.2.15:13568
+		10.0.2.15:34202 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:34202
+		213.46.172.37:13568 --> 213.46.172.37:3015
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 21
+	Recieved packet time (seconds):1448035863 	(microseconds):594509
+	Function timeInSeconds says: 1448035863.594509
+	Length 96 received at Fri Nov 20 17:11:03 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 22
+	Recieved packet time (seconds):1448035863 	(microseconds):594544
+	Function timeInSeconds says: 1448035863.594544
+	Length 54 received at Fri Nov 20 17:11:03 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 23
+	Recieved packet time (seconds):1448035863 	(microseconds):671321
+	Function timeInSeconds says: 1448035863.671321
+	Length 336 received at Fri Nov 20 17:11:03 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 24
+	Recieved packet time (seconds):1448035863 	(microseconds):671356
+	Function timeInSeconds says: 1448035863.671356
+	Length 54 received at Fri Nov 20 17:11:03 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 25
+	Recieved packet time (seconds):1448035865 	(microseconds):664335
+	Function timeInSeconds says: 1448035865.664335
+	Length 347 received at Fri Nov 20 17:11:05 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 26
+	Recieved packet time (seconds):1448035865 	(microseconds):664374
+	Function timeInSeconds says: 1448035865.664374
+	Length 54 received at Fri Nov 20 17:11:05 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 27
+	Recieved packet time (seconds):1448035865 	(microseconds):676123
+	Function timeInSeconds says: 1448035865.676123
+	Length 348 received at Fri Nov 20 17:11:05 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 28
+	Recieved packet time (seconds):1448035865 	(microseconds):676611
+	Function timeInSeconds says: 1448035865.676611
+	Length 60 received at Fri Nov 20 17:11:05 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 29
+	Recieved packet time (seconds):1448035865 	(microseconds):694987
+	Function timeInSeconds says: 1448035865.694987
+	Length 96 received at Fri Nov 20 17:11:05 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 30
+	Recieved packet time (seconds):1448035865 	(microseconds):732914
+	Function timeInSeconds says: 1448035865.732914
+	Length 54 received at Fri Nov 20 17:11:05 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 31
+	Recieved packet time (seconds):1448035869 	(microseconds):129887
+	Function timeInSeconds says: 1448035869.129887
+	Length 77 received at Fri Nov 20 17:11:09 2015
+	UDP (10.0.2.15 : 48592  -->  10.0.2.15 : 13568) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+		213.46.172.37:13568 --> 213.46.172.37:21983
+		10.0.2.15:3015 --> 10.0.2.15:13568
+		10.0.2.15:34202 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:34202
+		213.46.172.37:13568 --> 213.46.172.37:3015
+		10.0.2.15:48592 --> 10.0.2.15:13568
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 32
+	Recieved packet time (seconds):1448035869 	(microseconds):130093
+	Function timeInSeconds says: 1448035869.130093
+	Length 77 received at Fri Nov 20 17:11:09 2015
+	UDP (10.0.2.15 : 5594  -->  10.0.2.15 : 13568) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+		213.46.172.37:13568 --> 213.46.172.37:21983
+		10.0.2.15:3015 --> 10.0.2.15:13568
+		10.0.2.15:34202 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:34202
+		213.46.172.37:13568 --> 213.46.172.37:3015
+		10.0.2.15:48592 --> 10.0.2.15:13568
+		10.0.2.15:5594 --> 10.0.2.15:13568
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 33
+	Recieved packet time (seconds):1448035869 	(microseconds):130921
+	Function timeInSeconds says: 1448035869.130921
+	Length 292 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 34
+	Recieved packet time (seconds):1448035869 	(microseconds):131352
+	Function timeInSeconds says: 1448035869.131352
+	Length 60 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 35
+	Recieved packet time (seconds):1448035869 	(microseconds):131471
+	Function timeInSeconds says: 1448035869.131471
+	Length 1278 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 36
+	Recieved packet time (seconds):1448035869 	(microseconds):131731
+	Function timeInSeconds says: 1448035869.131731
+	Length 60 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 37
+	Recieved packet time (seconds):1448035869 	(microseconds):131776
+	Function timeInSeconds says: 1448035869.131776
+	Length 406 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 38
+	Recieved packet time (seconds):1448035869 	(microseconds):132085
+	Function timeInSeconds says: 1448035869.132085
+	Length 60 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 39
+	Recieved packet time (seconds):1448035869 	(microseconds):135219
+	Function timeInSeconds says: 1448035869.135219
+	Length 207 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 40
+	Recieved packet time (seconds):1448035869 	(microseconds):135490
+	Function timeInSeconds says: 1448035869.135490
+	Length 60 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 41
+	Recieved packet time (seconds):1448035869 	(microseconds):135542
+	Function timeInSeconds says: 1448035869.135542
+	Length 361 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 42
+	Recieved packet time (seconds):1448035869 	(microseconds):135676
+	Function timeInSeconds says: 1448035869.135676
+	Length 60 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 43
+	Recieved packet time (seconds):1448035869 	(microseconds):143971
+	Function timeInSeconds says: 1448035869.143971
+	Length 138 received at Fri Nov 20 17:11:09 2015
+	UDP (213.46.172.37 : 13568  -->  213.46.172.37 : 5594) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+		213.46.172.37:13568 --> 213.46.172.37:21983
+		10.0.2.15:3015 --> 10.0.2.15:13568
+		10.0.2.15:34202 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:34202
+		213.46.172.37:13568 --> 213.46.172.37:3015
+		10.0.2.15:48592 --> 10.0.2.15:13568
+		10.0.2.15:5594 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:5594
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 44
+	Recieved packet time (seconds):1448035869 	(microseconds):145404
+	Function timeInSeconds says: 1448035869.145404
+	Length 126 received at Fri Nov 20 17:11:09 2015
+	UDP (213.46.172.37 : 13568  -->  213.46.172.37 : 48592) PROTOCOL PROCESSING.
+Expired flows: 
+		10.0.2.15:49204 --> 10.0.2.15:13568
+		10.0.2.15:21983 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:49204
+		213.46.172.37:13568 --> 213.46.172.37:21983
+		10.0.2.15:3015 --> 10.0.2.15:13568
+		10.0.2.15:34202 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:34202
+		213.46.172.37:13568 --> 213.46.172.37:3015
+		10.0.2.15:48592 --> 10.0.2.15:13568
+		10.0.2.15:5594 --> 10.0.2.15:13568
+		213.46.172.37:13568 --> 213.46.172.37:5594
+		213.46.172.37:13568 --> 213.46.172.37:48592
+Processing flows: 
+		10.0.2.15:64978 --> 10.0.2.15:47873
+		31.13.84.8:47873 --> 31.13.84.8:64978
+
+
+Pcket no. 45
+	Recieved packet time (seconds):1448035869 	(microseconds):148759
+	Function timeInSeconds says: 1448035869.148759
+	Length 96 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 46
+	Recieved packet time (seconds):1448035869 	(microseconds):148797
+	Function timeInSeconds says: 1448035869.148797
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 47
+	Recieved packet time (seconds):1448035869 	(microseconds):167794
+	Function timeInSeconds says: 1448035869.167794
+	Length 96 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 48
+	Recieved packet time (seconds):1448035869 	(microseconds):167825
+	Function timeInSeconds says: 1448035869.167825
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 49
+	Recieved packet time (seconds):1448035869 	(microseconds):205468
+	Function timeInSeconds says: 1448035869.205468
+	Length 347 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 50
+	Recieved packet time (seconds):1448035869 	(microseconds):205498
+	Function timeInSeconds says: 1448035869.205498
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 51
+	Recieved packet time (seconds):1448035869 	(microseconds):275753
+	Function timeInSeconds says: 1448035869.275753
+	Length 545 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 52
+	Recieved packet time (seconds):1448035869 	(microseconds):275790
+	Function timeInSeconds says: 1448035869.275790
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 53
+	Recieved packet time (seconds):1448035869 	(microseconds):285188
+	Function timeInSeconds says: 1448035869.285188
+	Length 297 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 54
+	Recieved packet time (seconds):1448035869 	(microseconds):285217
+	Function timeInSeconds says: 1448035869.285217
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 55
+	Recieved packet time (seconds):1448035869 	(microseconds):356853
+	Function timeInSeconds says: 1448035869.356853
+	Length 348 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 56
+	Recieved packet time (seconds):1448035869 	(microseconds):357330
+	Function timeInSeconds says: 1448035869.357330
+	Length 60 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 57
+	Recieved packet time (seconds):1448035869 	(microseconds):378993
+	Function timeInSeconds says: 1448035869.378993
+	Length 96 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 58
+	Recieved packet time (seconds):1448035869 	(microseconds):379022
+	Function timeInSeconds says: 1448035869.379022
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 59
+	Recieved packet time (seconds):1448035869 	(microseconds):481923
+	Function timeInSeconds says: 1448035869.481923
+	Length 1241 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 60
+	Recieved packet time (seconds):1448035869 	(microseconds):481953
+	Function timeInSeconds says: 1448035869.481953
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 61
+	Recieved packet time (seconds):1448035869 	(microseconds):650097
+	Function timeInSeconds says: 1448035869.650097
+	Length 428 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 62
+	Recieved packet time (seconds):1448035869 	(microseconds):650659
+	Function timeInSeconds says: 1448035869.650659
+	Length 60 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 63
+	Recieved packet time (seconds):1448035869 	(microseconds):667590
+	Function timeInSeconds says: 1448035869.667590
+	Length 96 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 64
+	Recieved packet time (seconds):1448035869 	(microseconds):667618
+	Function timeInSeconds says: 1448035869.667618
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 65
+	Recieved packet time (seconds):1448035869 	(microseconds):767956
+	Function timeInSeconds says: 1448035869.767956
+	Length 325 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 66
+	Recieved packet time (seconds):1448035869 	(microseconds):767985
+	Function timeInSeconds says: 1448035869.767985
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 67
+	Recieved packet time (seconds):1448035869 	(microseconds):785740
+	Function timeInSeconds says: 1448035869.785740
+	Length 428 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 68
+	Recieved packet time (seconds):1448035869 	(microseconds):786434
+	Function timeInSeconds says: 1448035869.786434
+	Length 60 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 69
+	Recieved packet time (seconds):1448035869 	(microseconds):805119
+	Function timeInSeconds says: 1448035869.805119
+	Length 96 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 70
+	Recieved packet time (seconds):1448035869 	(microseconds):844607
+	Function timeInSeconds says: 1448035869.844607
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 71
+	Recieved packet time (seconds):1448035869 	(microseconds):905697
+	Function timeInSeconds says: 1448035869.905697
+	Length 340 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 72
+	Recieved packet time (seconds):1448035869 	(microseconds):905769
+	Function timeInSeconds says: 1448035869.905769
+	Length 54 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 73
+	Recieved packet time (seconds):1448035869 	(microseconds):990173
+	Function timeInSeconds says: 1448035869.990173
+	Length 427 received at Fri Nov 20 17:11:09 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 74
+	Recieved packet time (seconds):1448035869 	(microseconds):990913
+	Function timeInSeconds says: 1448035869.990913
+	Length 60 received at Fri Nov 20 17:11:09 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+
+
+Pcket no. 75
+	Recieved packet time (seconds):1448035870 	(microseconds):9941
+	Function timeInSeconds says: 1448035870.009941
+	Length 96 received at Fri Nov 20 17:11:10 2015
+	TCP (31.13.84.8:47873 --> 31.13.84.8:64978) PROTOCOL PROCESSING. FLAGS: 00011000
+	This packet is part of already existing flow!
+
+
+Pcket no. 76
+	Recieved packet time (seconds):1448035870 	(microseconds):9971
+	Function timeInSeconds says: 1448035870.009971
+	Length 54 received at Fri Nov 20 17:11:10 2015
+	TCP (10.0.2.15:64978 --> 10.0.2.15:47873) PROTOCOL PROCESSING. FLAGS: 00010000
+	This packet is part of already existing flow!
+49204 : 13568  |  10.0.2.15 : 10.0.2.15  |    |  packets: 1  |  bytes: 77
+21983 : 13568  |  10.0.2.15 : 10.0.2.15  |    |  packets: 1  |  bytes: 77
+13568 : 49204  |  213.46.172.37 : 213.46.172.37  |    |  packets: 1  |  bytes: 126
+13568 : 21983  |  213.46.172.37 : 213.46.172.37  |    |  packets: 1  |  bytes: 138
+3015 : 13568  |  10.0.2.15 : 10.0.2.15  |    |  packets: 1  |  bytes: 77
+34202 : 13568  |  10.0.2.15 : 10.0.2.15  |    |  packets: 1  |  bytes: 77
+13568 : 34202  |  213.46.172.37 : 213.46.172.37  |    |  packets: 1  |  bytes: 138
+13568 : 3015  |  213.46.172.37 : 213.46.172.37  |    |  packets: 1  |  bytes: 126
+48592 : 13568  |  10.0.2.15 : 10.0.2.15  |    |  packets: 1  |  bytes: 77
+5594 : 13568  |  10.0.2.15 : 10.0.2.15  |    |  packets: 1  |  bytes: 77
+13568 : 5594  |  213.46.172.37 : 213.46.172.37  |    |  packets: 1  |  bytes: 138
+13568 : 48592  |  213.46.172.37 : 213.46.172.37  |    |  packets: 1  |  bytes: 126
+Number of expired flows: 12
+Number of flows in cache: 2
+End of file reached...
+== STATISTICS ==
+Total flows: 14
+TCP 	packets: 64,	bytes: 13995
+UDP 	packets: 12,	bytes: 1254
+ICMP 	packets: 0,	bytes: 0
+IGMP 	packets: 0,	bytes: 0
+ARP 	packets: 0,	bytes: 0
+OTHER 	packets: 0,	bytes: 0
+total 	packets: 76,	bytes: 15249
+== END OF STATISTICS ==

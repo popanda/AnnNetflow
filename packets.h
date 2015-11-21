@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <arpa/inet.h>
 
 typedef uint8_t oneByte;
 typedef uint16_t twoBytes;
@@ -103,9 +104,9 @@ typedef struct nfV5hdr
 
 typedef struct nfV5flowRec
 {
-	in_addr srcaddr;
-	in_addr dstaddr;
-	in_addr nexthop;
+	struct in_addr srcaddr;
+	struct in_addr dstaddr;
+	struct in_addr nexthop;
 	twoBytes input = 0;
 	twoBytes output = 0;
 	fourBytes dPkts;
