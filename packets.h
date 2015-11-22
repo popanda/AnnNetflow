@@ -1,9 +1,16 @@
+/*
+*	File: packets.h
+*	Offline netflow probe, project into Network Applications and Network Administration (ISA)
+* 	Author: Anna Popková
+*	Other files: isa_exporter.h isa_exporter.cpp 
+*/
+
 #include <cstdint>
 #include <arpa/inet.h>
 
-typedef uint8_t oneByte;
-typedef uint16_t twoBytes;
-typedef uint32_t fourBytes;
+typedef uint8_t 	oneByte;
+typedef uint16_t 	twoBytes;
+typedef uint32_t 	fourBytes;
 
 #define MAX_FLOWS_IN_PACKET 30
 
@@ -15,6 +22,56 @@ Optional: These typedefs are not defined if no types with such characteristics e
 int16_t	uint16_t
 int32_t	uint32_t
 int64_t	uint64_t */
+
+
+// structures for netflow datagram version 5
+// description of all the variables in these structures is under
+typedef struct nfV5hdr
+{
+	twoBytes 	version = 5;
+	twoBytes 	count;
+	fourBytes 	SysUptime;
+	fourBytes 	unix_secs;
+	fourBytes 	unix_nsecs;
+	fourBytes 	flow_sequence;
+	oneByte 	engine_type = 0;
+	oneByte 	engine_id = 0;
+	twoBytes 	sampling_interval = 0; 
+
+} t_nfV5hdr;
+
+typedef struct nfV5flowRec
+{
+	struct in_addr 	srcaddr;
+	struct in_addr 	dstaddr;
+	struct in_addr 	nexthop;
+	twoBytes 		input 	= 0;
+	twoBytes 		output = 0;
+	fourBytes 		dPkts;
+	fourBytes 		dOctets;
+	fourBytes 		First;
+	fourBytes 		Last;
+	twoBytes 		srcport;
+	twoBytes 		dstport;
+	oneByte 		pad1 = 0;
+	oneByte 		tcp_flags;
+	oneByte 		prot;
+	oneByte 		ToS;
+	twoBytes 		src_as = 0;
+	twoBytes 		dst_as = 0;
+	oneByte 		src_mask = 0;
+	oneByte 		dst_mask = 0;
+	twoBytes 		pad2 = 0;
+
+} t_nfV5flowRec;
+
+
+// structure which represents packet which will be sended to collector
+typedef struct nfPkt
+{
+	nfV5hdr 	hdr;	
+	nfV5flowRec rec[MAX_FLOWS_IN_PACKET]; // could contains 30 flows or less
+} t_nfPkt;
 
 
 /*
@@ -36,28 +93,12 @@ int64_t	uint64_t */
 			(MO - there will be some function for storing these two values)
 	
 	16-19	6) flow_sequence - sequence counter of total flows seen
-			(MO - stored from the 2009 project - number of flows seen since the virtual machine isa2015 boted)
 	
 	20 		7) engine_type - Type of flow-switching engine 			
 	21		8) engine_id - Slot number of the flow-switching engine 
 	22-23	9) sampling_interval - First two bits hold the sampling mode; remaining 14 bits hold value of sampling interval 
-			(MO - also stored - unconflicted value = 0 - all of these three)
+			(MO - unconflicted value = 0 - all of these three)
 */
-
-typedef struct nfV5hdr
-{
-	twoBytes version = 5;
-	twoBytes count;
-	fourBytes SysUptime;
-	fourBytes unix_secs;
-	fourBytes unix_nsecs;
-	fourBytes flow_sequence;
-	oneByte engine_type = 0;
-	oneByte engine_id = 0;
-	twoBytes sampling_interval = 0; 
-
-} t_nfV5hdr;
-
 
 /*
 		b) IN FLOW RECORD
@@ -68,10 +109,10 @@ typedef struct nfV5hdr
 	8-11	3) nexthop - IP address of next hop router 
 	12-13	4) input - SNMP index of input interface 
 	14-15	5) output - SNMP index of output interface 
-			(MO - also stored - unconflicted value = 0 - all of these three)
+			(MO - unconflicted value = 0 - all of these three)
 
 	16-19	6) dPkts - packets in the flow 
-			(MO - number of packed in this flow)new 
+			(MO - number of packed in this flow)
 
 **	20-23	7) dOctets - Total number of Layer 3 bytes in the packets of the flow 
 			(MO - maybe the value which we can see on softflowd?)
@@ -84,7 +125,7 @@ typedef struct nfV5hdr
 	34-35	11) dstport - TCP/UDP destination port number or equivalent 
 
 *	36		12) pad1 - Unused (zero) bytes 
-			(MO - also stored - unconflicted value = 0)
+			(MO - unconflicted value = 0)
 
 *	37		13) tcp_flags - Cumulative OR of TCP flags 
 			(MO - take all the flag vectors from all tcp packets and do OR on them)
@@ -98,40 +139,9 @@ typedef struct nfV5hdr
 *	44 		18) src_mask - Source address prefix mask bits 
 *	45 		19) dst_mask - Destination address prefix mask bits 
 *	46-47 	20) pad2 - Unused (zero) bytes 
-			(MO - also stored - unconflicted value = 0 - all of these five values)
+			(MO - unconflicted value = 0 - all of these five values)
 
 */
-
-typedef struct nfV5flowRec
-{
-	struct in_addr srcaddr;
-	struct in_addr dstaddr;
-	struct in_addr nexthop;
-	twoBytes input = 0;
-	twoBytes output = 0;
-	fourBytes dPkts;
-	fourBytes dOctets;
-	fourBytes First;
-	fourBytes Last;
-	twoBytes srcport;
-	twoBytes dstport;
-	oneByte pad1 = 0;
-	oneByte tcp_flags;
-	oneByte prot;
-	oneByte ToS;
-	twoBytes src_as = 0;
-	twoBytes dst_as = 0;
-	oneByte src_mask = 0;
-	oneByte dst_mask = 0;
-	twoBytes pad2 = 0;
-
-} t_nfV5flowRec;
-
-typedef struct nfPkt
-{
-	nfV5hdr hdr;
-	nfV5flowRec rec[MAX_FLOWS_IN_PACKET];
-} t_nfPkt;
 
 
 

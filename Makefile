@@ -6,7 +6,7 @@ OBJ =
 
 
 isa_exporter: isa_exporter.o $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) isa_exporter.o -o isa_exporter -lpcap  && sudo apt-get install libpcap-dev
+	$(CC) $(CFLAGS) $(OBJ) isa_exporter.o -o isa_exporter -lpcap
 
 isa_exporter.o: isa_exporter.cpp 
 	$(CC) $(CFLAGS) -c isa_exporter.cpp
