@@ -14,15 +14,6 @@ typedef uint32_t 	fourBytes;
 
 #define MAX_FLOWS_IN_PACKET 30
 
-/*
-int8_t	uint8_t	Integer type with a width of exactly 8, 16, 32, or 64 bits.
-For signed types, negative values are represented using 2's complement.
-No padding bits.
-Optional: These typedefs are not defined if no types with such characteristics exist.*
-int16_t	uint16_t
-int32_t	uint32_t
-int64_t	uint64_t */
-
 
 // structures for netflow datagram version 5
 // description of all the variables in these structures is under
