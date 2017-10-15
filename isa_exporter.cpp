@@ -85,7 +85,7 @@ int main(int argc, char **argv)
 			SOUT << "\n\nPacket no. " << tcps + udps + icmps + igmps + 1 << std::endl;
 		if (MORE_DEBUG)
 		{
-			SOUT << "\tCECKING THE INTERVAL TO EXPORT:";
+			SOUT << "\tCHECKING THE INTERVAL TO EXPORT:";
 			SOUT << "  pktTime:" << std::fixed << timeInSeconds(pktTime) << "  -  intervalBgn:" << std::fixed << *intervalBgn << " (" << std::fixed << timeInSeconds(pktTime) - *intervalBgn << ")  >=  " << "params.intervalToExport:" << params.intervalToExport << std::endl;
 		}
 
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 
 			if ((exportExpired(expiredFlowInfoVector, pktTime, intervalBgn, params)) != 0)
 			{
-				SERR << "Error occured while exporting to collector." << std::endl;
+				SERR << "Error occured while exporting on collector." << std::endl;
 				return 1;
 			}
 
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
 		{
 			if (MORE_DEBUG)
 			{
-				SOUT << "\tCHECKING THE TIMEOUT TO EXPIRE:";
+				SOUT << "\tCHECKING THE TIMEOUT TO EXPIRATION:";
 				SOUT << "\tpktTime:" << std::fixed << timeInSeconds(pktTime) << "  -  (*iterator)->lstPktTime:" << std::fixed << timeInSeconds((*iterator)->lstPktTime) << " (" << std::fixed << (timeInSeconds(pktTime) - timeInSeconds((*iterator)->lstPktTime)) << ")  >=  params.intervalToExpire:" << params.intervalToExpire << std::endl;
 			}
 
@@ -119,7 +119,7 @@ int main(int argc, char **argv)
 			{
 				//this flow has to be expired - because tcp connection is inactive for time longer than intervalToExpire
 				if (DEBUG)
-					SOUT << "\t --> Unactive timeout reached!" << std::endl;
+					SOUT << "\t --> Inactive timeout reached!" << std::endl;
 				
 				//expiring this flow
 				(*iterator)->endTime.tv_sec 	= pktTime.tv_sec;	//sets the time of end of connection
@@ -134,7 +134,7 @@ int main(int argc, char **argv)
 		etherPtr = (struct ether_header *) packet;
 
 		if (DEBUG)
-			SOUT << "\tRecieved packet time (seconds):" << pktTime.tv_sec << " \t(microseconds):" << pktTime.tv_usec << std::endl;
+			SOUT << "\tReceived packet time (seconds):" << pktTime.tv_sec << " \t(microseconds):" << pktTime.tv_usec << std::endl;
 
 		//check if its IP packet - the others will be ignored
 		if (ntohs(etherPtr->ether_type) == ETHERTYPE_IP)         
@@ -164,7 +164,7 @@ int main(int argc, char **argv)
 			if (retValue != 0)
 			{				
 				if (retValue == 1)
-					SERR << "Error while proccesing TCP/UDP/ICMP/IGMP packet" << std::endl;
+					SERR << "Error while proccesing TCP/UDP/ICMP/IGMP packet." << std::endl;
 				if (retValue == 2)
 					SERR << "Error while proccesing Unknown packet." << std::endl;
 				return 1;
@@ -266,7 +266,7 @@ int processParams(int argc, char **argv, t_params *ptrParams)
 			    if (ptr)
 			    {
 			    	//Adress processing
-			    	SOUT << "Address prcessing: " << ptr << std::endl;
+			    	SOUT << "Address processing: " << ptr << std::endl;
 			    	if ((inet_aton(ptr, &(ptrParams->collectorAddr))) == 0)
 	 				{
 	 					SERR << "Invalid collector address."<< std::endl << "Exiting..." << std::endl;
@@ -452,7 +452,7 @@ int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInf
 		if(!needNewFlow) //if needNewFlow --> it was expired yet, does not waiting for ack
 			currentFlow->oneAckToExp = true;
 		if (DEBUG)
-			SOUT << "\tFIN flag founded. " << std::endl;
+			SOUT << "\tFIN flag found. " << std::endl;
 	}
 	if (flags.test(2))
 	{
@@ -460,7 +460,7 @@ int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInf
 		if (needNewFlow)
 			expireImmediately = true; //this packet is alone and will be expired immediately
 		if (DEBUG)
-			SOUT << "\tRST flag founded. " << std::endl;
+			SOUT << "\tRST flag found. " << std::endl;
 		for(t_flowInfoVector::iterator iterator = flowInfoVector->begin(); iterator != flowInfoVector->end(); ++iterator) 
 		{
 			if (isEqualFlow(pktInfo, *iterator))
@@ -502,7 +502,7 @@ int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInf
 					expiredFlowInfoVector->push_back(*iterator);
 					flowInfoVector->erase(iterator);
 					if (DEBUG)
-						SOUT << "\tACK flag founded after FIN --> Adding opposite flow to expired, erasing from cache..." << std::endl;
+						SOUT << "\tACK flag found after FIN --> Adding opposite flow to expired, erasing from cache..." << std::endl;
 					
 					//if this flow is already expired and this is only last ACT to end this connection, this packet will create new flow which will be expired immediately
 					if (needNewFlow)
@@ -521,7 +521,7 @@ int processTCP(const u_char *packet, t_flowInfoVector *flowInfoVector, t_flowInf
 			if (DEBUG)
 			{
 				SOUT << "\t --> Max-flows in cache reached!" 
-					 << "\tExpiring the oldest unactive flow!" << std::endl;
+					 << "\tExpiring the oldest inactive flow!" << std::endl;
 			}
 			expireOldestUnactive(flowInfoVector, expiredFlowInfoVector, pktTime);
 		}
@@ -692,7 +692,7 @@ int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTim
 	
 	if ((skt = socket(PF_INET, SOCK_DGRAM, 0)) < 0)
 	{
-		SERR << "Failed on creating packet." << std::endl;
+		SERR << "Failed when creating packet." << std::endl;
 		return -1;
 	}
 	
@@ -744,7 +744,7 @@ int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTim
 			if (MORE_DEBUG)
 			{
 				std::bitset<8> flags = newPkt->rec[flowsCnt].tcp_flags;
-				SOUT << "Cummulative or of packets in this flow:" << flags << std::endl;
+				SOUT << "Cummulative OR of packets in this flow:" << flags << std::endl;
 				SOUT << inet_ntoa(newPkt->rec[flowsCnt].srcaddr) << " : " << std::endl;
 				SOUT << inet_ntoa(newPkt->rec[flowsCnt].dstaddr) << " : " << std::endl;
 				SOUT << inet_ntoa(newPkt->rec[flowsCnt].nexthop) << " : " << std::endl;
@@ -769,7 +769,7 @@ int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTim
 		// packet is ready to send
 		if (MORE_DEBUG)
 		{
-			SOUT << "Packet is ready to send (with " << flowsCnt << " flows), total size: " << sizeof(*newPkt) << ", header size: " << sizeof(newPkt->hdr) << ". \nHeader: " <<  std::endl;
+			SOUT << "Packet is ready to be sent (with " << flowsCnt << " flows), total size: " << sizeof(*newPkt) << ", header size: " << sizeof(newPkt->hdr) << ". \nHeader: " <<  std::endl;
 			SOUT <<  newPkt->hdr.version << " : " << newPkt->hdr.count << " : " << newPkt->hdr.SysUptime << " ("  << sysuptimeD << ") : " << newPkt->hdr.unix_secs << " : " << newPkt->hdr.unix_nsecs << " : " << newPkt->hdr.flow_sequence << " : " << newPkt->hdr.engine_type << " : " << newPkt->hdr.engine_id << " : " << newPkt->hdr.sampling_interval << std::endl;
 		}
 			
@@ -781,7 +781,7 @@ int exportExpired(t_flowInfoVector *expiredFlowInfoVector, struct timeval pktTim
 		}
 		
 		if (MORE_DEBUG)
-			SOUT << "Packet sended successfuly!" << std::endl;
+			SOUT << "Packet sent successfuly!" << std::endl;
 		
 		delete newPkt;
 		
@@ -870,7 +870,7 @@ void expireOldestUnactive(t_flowInfoVector *flowInfoVector, t_flowInfoVector *ex
 
 		}
 		if (DEBUG)
-			SOUT << "\tExpiring the odest one (time - " << std::fixed << oldstTime << "): " << inet_ntoa((*iteratorOldst)->srcAddr) << ":" << (*iteratorOldst)->srcPort << " --> " << inet_ntoa((*iteratorOldst)->dstAddr) << ":" << (*iteratorOldst)->dstPort << "\n\tbefore: expired: " << expiredFlowInfoVector->size() << "  cache: " << flowInfoVector->size();
+			SOUT << "\tExpiring the oldest one (time - " << std::fixed << oldstTime << "): " << inet_ntoa((*iteratorOldst)->srcAddr) << ":" << (*iteratorOldst)->srcPort << " --> " << inet_ntoa((*iteratorOldst)->dstAddr) << ":" << (*iteratorOldst)->dstPort << "\n\tbefore: expired: " << expiredFlowInfoVector->size() << "  cache: " << flowInfoVector->size();
 		
 		//expiring this flow
 		(*iteratorOldst)->endTime.tv_sec = pktTime.tv_sec;
