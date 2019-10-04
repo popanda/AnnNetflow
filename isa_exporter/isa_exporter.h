@@ -33,9 +33,10 @@
 #include <signal.h>
 
 
-#define SERR 	std::cerr
-#define SOUT 	std::cout
-#define SIN 	std::cin
+#define SERR    std::cerr
+#define SOUT    std::cout
+#define SIN     std::cin
+#define SENDL   std::endl
 
 #define ETH_HEADER 	14
 
@@ -50,44 +51,44 @@
 
 //structure which can identify ip packet
 typedef struct pktInfo {
-	in_addr srcAddr;
-	in_addr dstAddr;
-	u_short srcPort;
-	u_short dstPort;
-	u_char 	proto;
+    in_addr srcAddr;
+    in_addr dstAddr;
+    u_short srcPort;
+    u_short dstPort;
+    u_char 	proto;
 } t_pktInfo;
 
 //structure of parameters for this program
 typedef struct params {
-	
-	const char 	*inFile;
-	in_addr 	collectorAddr;
-	int 		collectorPort;
-	int 		intervalToExport;
-	u_int 		maxFlows;
-	int 		intervalToExpire;
+    
+    const char 	*inFile;
+    in_addr 	collectorAddr;
+    int 		collectorPort;
+    int 		intervalToExport;
+    u_int 		maxFlows;
+    int 		intervalToExpire;
 
 } t_params;
 
 //information about seen flows
 typedef struct flowInfo
 {
-	in_addr	srcAddr;
-	in_addr dstAddr;
-	u_short srcPort;
-	u_short dstPort;
-	u_char 	proto;
-	u_int 	pktCnt;
-	u_int 	octCnt;
-	u_long 	byteCnt;
-	u_char 	ToS;
-	u_char 	tcpFlags;
-	struct 	timeval lstPktTime;
-	struct 	timeval startTime;
-	struct 	timeval endTime;
-	bool 	oneAckToExp;
+    in_addr	srcAddr;
+    in_addr dstAddr;
+    u_short srcPort;
+    u_short dstPort;
+    u_char 	proto;
+    u_int 	pktCnt;
+    u_int 	octCnt;
+    u_long 	byteCnt;
+    u_char 	ToS;
+    u_char 	tcpFlags;
+    struct 	timeval lstPktTime;
+    struct 	timeval startTime;
+    struct 	timeval endTime;
+    bool 	oneAckToExp;
 
-	/* data */
+    /* data */
 } t_flowInfo;
 
 typedef std::vector<t_flowInfo *> t_flowInfoVector;
